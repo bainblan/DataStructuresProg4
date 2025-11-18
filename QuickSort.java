@@ -1,4 +1,5 @@
-package cs2720.p4;
+
+import java.util.Random;
 
 public class QuickSort implements SortStrategy {
 
@@ -9,21 +10,25 @@ public class QuickSort implements SortStrategy {
      * @param array the array to sort
      */
     public void sort(int[] array) {
-        quickSort(array, 0, array.length - 1);
+        // quick sort implementation
+        quickSortLast(array, 0, array.length - 1);
     }
 
-    private void quickSort(int[] values, int first, int last) {
-        if (first < last) {
+    private final Random rand = new Random();
+
+    private void quickSortLast(int[] values, int first, int last) {
+        if (first < last) // general case
+        {
             int pivot = partition(values, first, last);
-            quickSort(values, first, pivot - 1);
-            quickSort(values, pivot + 1, last);
+            quickSortLast(values, first, pivot - 1);
+            quickSortLast(values, pivot + 1, last);
         }
     }
 
     private int partition(int[] values, int first, int last) {
         /**
-         * Partition the subarray values[first..last] around a pivot (last element).
-         * Elements <= pivot are moved to the left of the pivot index.
+         * Partition the subarray values[first..last] around a pivot (last
+         * element). Elements <= pivot are moved to the left of the pivot index.
          *
          * @param values the array to partition
          * @param first start index for partition
@@ -35,14 +40,31 @@ public class QuickSort implements SortStrategy {
         for (int j = first; j < last - 1; j++) {
             if (values[j] <= x) {
                 i++;
-                int temp = values[i];
-                values[i] = values[j];
-                values[j] = temp;
+                swap(values, i, j);
             }
         }
-        int temp = values[i + 1];
-        values[i + 1] = values[last];
-        values[last] = temp;
-        return i++;
+        swap(values, i + 1, last);
+        return i + 1;
+    }
+
+    public void quickSortRand(int[] arr, int first, int last) {
+        if (first < last) {
+            int pivotIndex = randomPartition(arr, first, last);
+            quickSortRand(arr, first, pivotIndex - 1);
+            quickSortRand(arr, pivotIndex + 1, last);
+        }
+    }
+
+    private int randomPartition(int[] arr, int first, int last) {
+        int randomIndex = first + rand.nextInt(last - first + 1);
+        // swap random pivot into last
+        swap(arr, randomIndex, last);
+        return partition(arr, first, last);
+    }
+
+    private void swap(int[] values, int item1, int item2) {
+        int temp = values[item1];
+        values[item1] = values[item2];
+        values[item2] = temp;
     }
 }

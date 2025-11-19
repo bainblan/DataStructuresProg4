@@ -4,5 +4,5 @@ public interface SortStrategy {
 
     void sort(int[] array);
 
-    public void getComparisons();
+    public long getComparisons();
 }

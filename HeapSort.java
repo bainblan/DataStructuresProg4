@@ -2,6 +2,12 @@ package cs2720.p4;
 
 public class HeapSort implements SortStrategy {
 
+    private long comparisons = 0;
+
+    public long getComparisons() {
+        return comparisons;
+    }
+    
     @Override
     public void sort(int[] array) {
         // heap sort implementation

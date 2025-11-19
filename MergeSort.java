@@ -2,6 +2,12 @@ package cs2720.p4;
 
 public class MergeSort implements SortStrategy {
 
+    private long comparisons = 0;
+
+    public long getComparisons() {
+        return comparisons;
+    }
+
     @Override
     public void sort(int[] array) {
         // merge sort implementation
@@ -28,6 +34,7 @@ public class MergeSort implements SortStrategy {
 
         // merge while both halves have elements
         while (i <= mid && j <= right) {
+            comparisons++;
             if (arr[i] <= arr[j]) {
                 temp[k++] = arr[i++];
             } else {

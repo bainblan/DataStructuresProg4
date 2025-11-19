@@ -23,7 +23,7 @@ public class HeapSort implements SortStrategy {
             reheapDown(values, index, numValues - 1);
         }
         for (index = numValues - 1; index >= 1; index--) {
-            swap(values, numValues, index);
+            swap(values, numValues - 1, index);
             reheapDown(values, 0, index - 1);
         }
     }
@@ -44,10 +44,12 @@ public class HeapSort implements SortStrategy {
         rightChild = root * 2 + 2;
         maxIndex = -1;
         if (leftChild <= bottom) {
-            if (values[leftChild] > values[rightChild]) {
+            if (rightChild <= bottom && values[leftChild] > values[rightChild]) {
                 maxIndex = leftChild;
-            } else {
+            } else if (rightChild <= bottom) {
                 maxIndex = rightChild;
+            } else {
+                maxIndex = leftChild;
             }
             if (values[maxIndex] > values[root]) {
                 swap(values, maxIndex, root);

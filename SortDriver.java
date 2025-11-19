@@ -52,12 +52,18 @@ public class SortDriver {
         }
         System.out.println("Nums loaded into array successfully");
         // 7. SORT!
-        SortStrategy strategy = new MergeSort();
+        SortStrategy strategy = new QuickSortLast();
         strategy.sort(values);
         // 8. Print sorted values
         for (int i = 0; i < values.length; i++) {
             System.out.println(values[i] + " ");
         }
-        System.out.println("Nums have been sorted!");
+        int check = values[values.length - 1];
+        if (values[0] == 0 && check == 9999) {
+            System.out.println("Nums have been sorted!");
+        } else {
+            System.out.println("Needs some work");
+        }
+        
     }
 }

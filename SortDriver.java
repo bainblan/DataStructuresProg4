@@ -1,16 +1,18 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SortDriver {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        // 4. Print menu of algorithm options
+        // 1. Print menu of algorithm options
         System.out.println("selection-sort (s) merge-sort (m) heap-sort (h) quick-sort-last (q)");
         System.out.println("quick-sort-rand (r)");
 
-        // 4. Get algorithm letter from the user
+        // 2. Get algorithm letter from the user
         Scanner input = new Scanner(System.in);
         System.out.print("Enter the algorithm: ");
         char choice = input.nextLine().trim().toLowerCase().charAt(0);
@@ -31,19 +33,21 @@ public class SortDriver {
 
         // 2. Read integers from file
         Scanner fileScanner = new Scanner(file);
-
-        // 4. Put numbers in array
-        int[] array = new int[10000];
-        try {
-            int index = 0;
-            while (fileScanner.hasNextInt()) {
-                array[index++] = fileScanner.nextInt();
-            }
-            fileScanner.close();
-            System.out.println("Nums loaded into array successfully");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Index out of bounds");
+        List<Integer> list = new ArrayList<>();
+        while (fileScanner.hasNextInt()) {
+            list.add(fileScanner.nextInt());
         }
-
+        fileScanner.close();
+        int[] values = new int[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            values[i] = list.get(i);
+        }
+        System.out.println("Nums loaded into array successfully");
+        SortStrategy strategy = new MergeSort();
+        strategy.sort(values);
+        for (int i = 0; i < values.length; i++) {
+            System.out.println(values[i] + " ");
+        }
+        System.out.println("Nums have been sorted!");
     }
 }

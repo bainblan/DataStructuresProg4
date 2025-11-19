@@ -2,16 +2,16 @@ package cs2720.p4;
 
 public class SelectionSort implements SortStrategy {
 
-    @Override
-    public void sort(int[] array) {
-        // selection sort implementation
-        selectionSort(array, array.length - 1);
-    }
-
     private long comparisons = 0;
 
     public long getComparisons() {
         return comparisons;
+    }
+    
+    @Override
+    public void sort(int[] array) {
+        // selection sort implementation
+        selectionSort(array, array.length - 1);
     }
 
     private int minIndex(int[] values, int start, int end) {

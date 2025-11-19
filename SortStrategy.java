@@ -6,4 +6,6 @@ public interface SortStrategy {
      * @param array the array to sort
      */
     void sort(int[] array);
+
+    public long getComparisons();
 }

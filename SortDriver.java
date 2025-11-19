@@ -61,6 +61,7 @@ public class SortDriver {
         int check = values[values.length - 1];
         if (values[0] == 0 && check == 9999) {
             System.out.println("Nums have been sorted!");
+            System.out.println("Number of comparisons = " + strategy.getComparisons());
         } else {
             System.out.println("Needs some work");
         }

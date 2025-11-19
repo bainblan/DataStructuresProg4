@@ -11,6 +11,12 @@ public class SelectionSort implements SortStrategy {
         selectionSort(array, array.length - 1);
     }
 
+    private long comparisons = 0;
+    
+    public long getComparisons() {
+        return comparisons;
+    }
+
     /**
      * Find the index of the minimum element in values between start and end (inclusive).
      *

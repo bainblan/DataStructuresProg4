@@ -1,6 +1,13 @@
 import java.util.Random;
 
 public class QuickSortRandom implements SortStrategy {
+
+    private long comparisons = 0;
+
+    public long getComparisons() {
+        return comparisons;
+    }
+    
     @Override
     /**
      * Sort the given array using quick sort.

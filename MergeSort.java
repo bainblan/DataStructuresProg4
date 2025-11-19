@@ -1,6 +1,12 @@
 
 public class MergeSort implements SortStrategy {
 
+    private long comparisons = 0;
+
+    public long getComparisons() {
+        return comparisons;
+    }
+    
     /**
      * Sort the given array using merge sort.
      *

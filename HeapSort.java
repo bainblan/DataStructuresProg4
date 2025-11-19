@@ -1,6 +1,12 @@
 
 public class HeapSort implements SortStrategy {
 
+    private long comparisons = 0;
+
+    public long getComparisons() {
+        return comparisons;
+    }
+
     /**
      * Sort the given array using heap sort.
      *
@@ -43,10 +49,15 @@ public class HeapSort implements SortStrategy {
         int maxChild = leftChild;
 
         // If right child exists and is larger, choose it
-        if (rightChild <= bottom && values[rightChild] > values[leftChild]) {
-            maxChild = rightChild;
+        if (rightChild <= bottom) {
+            comparisons++; // COUNT
+            if (values[rightChild] > values[leftChild]) {
+                maxChild = rightChild;
+            }
         }
+
         // If child is greater than root, swap and continue
+        comparisons++;
         if (values[maxChild] > values[root]) {
             swap(values, maxChild, root);
             reheapDown(values, maxChild, bottom);

@@ -36,11 +36,12 @@ public class SelectionSort implements SortStrategy {
      * @param numValues the number of values (usually array.length - 1)
      */
     private void selectionSort(int[] values, int numValues) {
-        int endIndex = numValues - 1;
+        int endIndex = numValues;
         for (int current = 0; current < endIndex; current++) {
+            int minIdx = minIndex(values, current, endIndex);
             int temp = values[current];
-            values[current] = values[minIndex(values, current, endIndex)];
-            values[minIndex(values, current, endIndex)] = temp;
+            values[current] = values[minIdx];
+            values[minIdx] = temp;
         }
     }
 }

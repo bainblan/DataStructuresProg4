@@ -52,7 +52,7 @@ public class SortDriver {
         }
         System.out.println("Nums loaded into array successfully");
         // 7. SORT!
-        SortStrategy strategy = new QuickSortLast();
+        SortStrategy strategy = new SelectionSort();
         strategy.sort(values);
         // 8. Print sorted values
         for (int i = 0; i < values.length; i++) {

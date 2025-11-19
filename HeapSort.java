@@ -7,7 +7,7 @@ public class HeapSort implements SortStrategy {
     public long getComparisons() {
         return comparisons;
     }
-    
+
     @Override
     public void sort(int[] array) {
         // heap sort implementation
@@ -40,7 +40,7 @@ public class HeapSort implements SortStrategy {
         // ReheapDown continued
         maxIndex = -1;
         if (leftChild <= bottom) {
-            comparisons++;
+            //comparisons++;
             if (values[leftChild] > values[rightChild]) {
                 maxIndex = leftChild;
                 comparisons++;

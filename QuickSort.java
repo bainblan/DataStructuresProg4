@@ -1,3 +1,5 @@
+package cs2720.p4;
+
 import java.util.Random;
 
 public class QuickSortRandom implements SortStrategy {
@@ -14,9 +16,17 @@ public class QuickSortRandom implements SortStrategy {
      *
      * @param array the array to sort
      */
-    public void sort(int[] array) {
-        // quick sort implementation
-        quickSortRand(array, 0, array.length - 1);
+    public void sort(int[] array, String type) {
+        if (type.equals("last")) {
+            quickSortLast(array, 0, array.length - 1);
+            return;
+        } else if (type.equals("random")) {
+            quickSortRand(array, 0, array.length - 1);
+            return;
+        } else {
+            throw new IllegalArgumentException("Invalid quick sort type: " + type);
+        }
+
     }
 
     private final Random rand = new Random();
@@ -26,6 +36,14 @@ public class QuickSortRandom implements SortStrategy {
             int pivotIndex = randomPartition(arr, first, last);
             quickSortRand(arr, first, pivotIndex - 1);
             quickSortRand(arr, pivotIndex + 1, last);
+        }
+    }
+
+    private void quickSortLast(int[] values, int first, int last) {
+        if (first < last) {
+            int pivot = partition(values, first, last);
+            quickSortLast(values, first, pivot - 1);
+            quickSortLast(values, pivot + 1, last);
         }
     }
 

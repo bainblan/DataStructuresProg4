@@ -7,7 +7,7 @@ public class QuickSortRandom implements SortStrategy {
     public long getComparisons() {
         return comparisons;
     }
-    
+
     @Override
     /**
      * Sort the given array using quick sort.
@@ -40,6 +40,7 @@ public class QuickSortRandom implements SortStrategy {
         int pivot = arr[last];
         int i = first - 1;
         for (int j = first; j < last; j++) {
+            comparisons++;
             if (arr[j] < pivot) {
                 i++;
                 swap(arr, i, j);

@@ -1,6 +1,12 @@
 
 public class SelectionSort implements SortStrategy {
 
+    private long comparisons = 0;
+    
+    public long getComparisons() {
+        return comparisons;
+    }
+
     @Override
     /**
      * Sort the given array using selection sort.
@@ -9,12 +15,6 @@ public class SelectionSort implements SortStrategy {
      */
     public void sort(int[] array) {
         selectionSort(array, array.length - 1);
-    }
-
-    private long comparisons = 0;
-    
-    public long getComparisons() {
-        return comparisons;
     }
 
     /**
@@ -28,6 +28,7 @@ public class SelectionSort implements SortStrategy {
     private int minIndex(int[] values, int start, int end) {
         int indexOfMin = start;
         for (int index = start + 1; index <= end; index++) {
+            comparisons++;
             if (values[index] < values[indexOfMin]) {
                 indexOfMin = index;
             }

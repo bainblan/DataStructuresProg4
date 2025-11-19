@@ -1,6 +1,4 @@
 
-import java.util.Random;
-
 public class QuickSortLast implements SortStrategy {
 
     private long comparisons = 0;
@@ -8,7 +6,7 @@ public class QuickSortLast implements SortStrategy {
     public long getComparisons() {
         return comparisons;
     }
-    
+
     @Override
     /**
      * Sort the given array using quick sort.
@@ -21,8 +19,7 @@ public class QuickSortLast implements SortStrategy {
     }
 
     private void quickSortLast(int[] values, int first, int last) {
-        if (first < last) // general case
-        {
+        if (first < last) {
             int pivot = partition(values, first, last);
             quickSortLast(values, first, pivot - 1);
             quickSortLast(values, pivot + 1, last);
@@ -33,6 +30,7 @@ public class QuickSortLast implements SortStrategy {
         int pivot = arr[last];
         int i = first - 1;
         for (int j = first; j < last; j++) {
+            comparisons++;
             if (arr[j] < pivot) {
                 i++;
                 swap(arr, i, j);

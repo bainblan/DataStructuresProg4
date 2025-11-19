@@ -6,7 +6,7 @@ public class MergeSort implements SortStrategy {
     public long getComparisons() {
         return comparisons;
     }
-    
+
     /**
      * Sort the given array using merge sort.
      *
@@ -20,16 +20,15 @@ public class MergeSort implements SortStrategy {
     /**
      * Recursively sort the portion of the array between left and right.
      *
-     * @param arr the array to sort
-     * @param left left index of the range to sort
+     * @param arr   the array to sort
+     * @param left  left index of the range to sort
      * @param right right index of the range to sort
      */
     private void mergeSort(int[] arr, int left, int right) {
-        if (left >= right) {
+        if (left >= right)
             return;
-        }
-        int mid = left + (right - left) / 2;
 
+        int mid = left + (right - left) / 2;
         mergeSort(arr, left, mid);
         mergeSort(arr, mid + 1, right);
         merge(arr, left, mid, right);
@@ -38,9 +37,9 @@ public class MergeSort implements SortStrategy {
     /**
      * Merge two sorted subarrays [left..mid] and [mid+1..right] into arr.
      *
-     * @param arr the array containing the halves to merge
-     * @param left left index of first half
-     * @param mid end index of first half
+     * @param arr   the array containing the halves to merge
+     * @param left  left index of first half
+     * @param mid   end index of first half
      * @param right end index of second half
      */
     private void merge(int[] arr, int left, int mid, int right) {
@@ -48,8 +47,9 @@ public class MergeSort implements SortStrategy {
         int i = left;
         int j = mid + 1;
         int k = 0;
-
+        
         while (i <= mid && j <= right) {
+            comparisons++;
             if (arr[i] <= arr[j]) {
                 temp[k++] = arr[i++];
             } else {

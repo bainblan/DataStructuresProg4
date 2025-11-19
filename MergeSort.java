@@ -1,28 +1,49 @@
+package cs2720.p4;
+
 public class MergeSort implements SortStrategy {
+
+    /**
+     * Sort the given array using merge sort.
+     *
+     * @param array the array to sort
+     */
     @Override
     public void sort(int[] array) {
-        // merge sort implementation
         mergeSort(array, 0, array.length - 1);
     }
 
+    /**
+     * Recursively sort the portion of the array between left and right.
+     *
+     * @param arr the array to sort
+     * @param left left index of the range to sort
+     * @param right right index of the range to sort
+     */
     private void mergeSort(int[] arr, int left, int right) {
-        if (left >= right) return;   // base case
-
+        if (left >= right) {
+            return;
+        }
         int mid = left + (right - left) / 2;
 
-        mergeSort(arr, left, mid);       // sort left half
-        mergeSort(arr, mid + 1, right);  // sort right half
-        merge(arr, left, mid, right);    // merge halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
     }
 
+    /**
+     * Merge two sorted subarrays [left..mid] and [mid+1..right] into arr.
+     *
+     * @param arr the array containing the halves to merge
+     * @param left left index of first half
+     * @param mid end index of first half
+     * @param right end index of second half
+     */
     private void merge(int[] arr, int left, int mid, int right) {
         int[] temp = new int[right - left + 1];
+        int i = left;
+        int j = mid + 1;
+        int k = 0;
 
-        int i = left;      // left pointer
-        int j = mid + 1;   // right pointer
-        int k = 0;         // temp index
-
-        // merge while both halves have elements
         while (i <= mid && j <= right) {
             if (arr[i] <= arr[j]) {
                 temp[k++] = arr[i++];
@@ -30,18 +51,12 @@ public class MergeSort implements SortStrategy {
                 temp[k++] = arr[j++];
             }
         }
-
-        // copy remaining left side
         while (i <= mid) {
             temp[k++] = arr[i++];
         }
-
-        // copy remaining right side
         while (j <= right) {
             temp[k++] = arr[j++];
         }
-
-        // copy merged array back into original
         for (int t = 0; t < temp.length; t++) {
             arr[left + t] = temp[t];
         }

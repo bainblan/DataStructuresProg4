@@ -1,3 +1,4 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -19,12 +20,18 @@ public class SortDriver {
 
         // 5. Decide strategy (placeholder — real sorting happens elsewhere)
         String algoName = switch (choice) {
-            case 's' -> "Selection-sort";
-            case 'm' -> "Merge-sort";
-            case 'h' -> "Heap-sort";
-            case 'q' -> "Quick-sort-last";
-            case 'r' -> "Quick-sort-rand";
-            default -> "Unknown";
+            case 's' ->
+                "Selection-sort";
+            case 'm' ->
+                "Merge-sort";
+            case 'h' ->
+                "Heap-sort";
+            case 'q' ->
+                "Quick-sort-last";
+            case 'r' ->
+                "Quick-sort-rand";
+            default ->
+                "Unknown";
         };
 
         // 1. Read filename from command line

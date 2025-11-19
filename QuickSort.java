@@ -1,7 +1,14 @@
+
 import java.util.Random;
 
 public class QuickSort implements SortStrategy {
+
     @Override
+    /**
+     * Sort the given array using quick sort.
+     *
+     * @param array the array to sort
+     */
     public void sort(int[] array) {
         // quick sort implementation
         quickSortLast(array, 0, array.length - 1);
@@ -19,6 +26,15 @@ public class QuickSort implements SortStrategy {
     }
 
     private int partition(int[] values, int first, int last) {
+        /**
+         * Partition the subarray values[first..last] around a pivot (last
+         * element). Elements <= pivot are moved to the left of the pivot index.
+         *
+         * @param values the array to partition
+         * @param first start index for partition
+         * @param last end index for partition (pivot)
+         * @return the final pivot index
+         */
         int x = values[last];
         int i = first - 1;
         for (int j = first; j < last - 1; j++) {
@@ -50,5 +66,5 @@ public class QuickSort implements SortStrategy {
         int temp = values[item1];
         values[item1] = values[item2];
         values[item2] = temp;
-    }    
+    }
 }

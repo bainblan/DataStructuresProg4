@@ -18,7 +18,7 @@ public class SortDriver {
         System.out.print("Enter the algorithm: ");
         char choice = input.nextLine().trim().toLowerCase().charAt(0);
 
-        // 5. Decide strategy (placeholder — real sorting happens elsewhere)
+        // 3. Decide strategy (placeholder — real sorting happens elsewhere)
         String algoName = switch (choice) {
             case 's' ->
                 "Selection-sort";
@@ -34,24 +34,27 @@ public class SortDriver {
                 "Unknown";
         };
 
-        // 1. Read filename from command line
+        // 4. Read filename from command line
         String filename = args[0];
         File file = new File(filename);
 
-        // 2. Read integers from file
+        // 5. Read integers from file into ArrayList
         Scanner fileScanner = new Scanner(file);
         List<Integer> list = new ArrayList<>();
         while (fileScanner.hasNextInt()) {
             list.add(fileScanner.nextInt());
         }
         fileScanner.close();
+        // 6. Convert ArrayList to regular array
         int[] values = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             values[i] = list.get(i);
         }
         System.out.println("Nums loaded into array successfully");
+        // 7. SORT!
         SortStrategy strategy = new MergeSort();
         strategy.sort(values);
+        // 8. Print sorted values
         for (int i = 0; i < values.length; i++) {
             System.out.println(values[i] + " ");
         }

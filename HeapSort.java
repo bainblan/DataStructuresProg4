@@ -1,13 +1,12 @@
-package cs2720.p4;
 
 public class HeapSort implements SortStrategy {
 
-    @Override
     /**
      * Sort the given array using heap sort.
      *
      * @param array the array to sort
      */
+    @Override
     public void sort(int[] array) {
         heapSort(array, array.length - 1);
     }

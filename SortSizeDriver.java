@@ -18,44 +18,47 @@ public class SortSizeDriver {
         System.out.print("Enter size of array to sort: ");
         int size = input.nextInt();
 
-        // 4. Generate array of given size with random integers
-        values = new int[size];
-        for (int i = 0; i < size; i++) {
-            values[i] = (int) (Math.random() * 10000); // Random integers between 0 and 9999
-        }
-
-        // 5. SORT!
+        // 4. Run three trials with new random arrays each time
         String type;
         if (choice == 's') {
-            sCalled();
             type = "#Selection-sort";
         } else if (choice == 'm') {
-            mCalled();
             type = "#Merge-sort";
         } else if (choice == 'h') {
-            hCalled();
             type = "#Heap-sort";
         } else if (choice == 'q') {
-            qCalled();
             type = "#Quick-sort-last";
         } else if (choice == 'r') {
-            rCalled();
             type = "#Quick-sort-rand";
         } else {
             System.err.println("Invalid algorithm choice: " + choice);
+            input.close();
             return;
         }
 
-        for (int i = 0; i < size; i++) {
-            System.out.print(values[i] + " ");
+        long[] comparisonsResults = new long[3];
+        for (int trial = 0; trial < 3; trial++) {
+            values = new int[size];
+            for (int i = 0; i < size; i++) {
+                values[i] = (int) (Math.random() * 10000); // Random integers between 0 and 9999
+            }
+            switch (choice) {
+                case 's': sCalled(); break;
+                case 'm': mCalled(); break;
+                case 'h': hCalled(); break;
+                case 'q': qCalled(); break;
+                case 'r': rCalled(); break;
+            }
+            comparisonsResults[trial] = strategy.getComparisons();
         }
-        System.out.println();
 
-        // 6. Print results
+        // Print results
         System.out.println("================================");
         System.out.println("Algorithm: " + type);
         System.out.println("Array size: " + size);
-        System.out.println("Comparisons: " + strategy.getComparisons());
+        for (int trial = 0; trial < 3; trial++) {
+            System.out.println("Trial " + (trial+1) + " comparisons: " + comparisonsResults[trial]);
+        }
         System.out.println("================================");
 
         input.close();

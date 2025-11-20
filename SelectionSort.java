@@ -11,7 +11,7 @@ public class SelectionSort implements SortStrategy {
     @Override
     public void sort(int[] array) {
         // selection sort implementation
-        selectionSort(array, array.length - 1);
+        selectionSort(array, array.length);
     }
 
     private int minIndex(int[] values, int start, int end) {
@@ -28,9 +28,10 @@ public class SelectionSort implements SortStrategy {
     private void selectionSort(int[] values, int numValues) {
         int endIndex = numValues - 1;
         for (int current = 0; current < endIndex; current++) {
+            int minIndex = minIndex(values, current, endIndex);
             int temp = values[current];
-            values[current] = values[minIndex(values, current, endIndex)];
-            values[minIndex(values, current, endIndex)] = temp;
+            values[current] = values[minIndex];
+            values[minIndex] = temp;
         }
     }
 }

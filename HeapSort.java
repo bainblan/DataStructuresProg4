@@ -43,7 +43,6 @@ public class HeapSort implements SortStrategy {
             }
         }
         // Compare child vs root
-        comparisons++; // COUNT
         if (values[maxChild] > values[root]) {
             swap(values, maxChild, root);
             reheapDown(values, maxChild, bottom);

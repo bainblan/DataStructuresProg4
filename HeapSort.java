@@ -1,5 +1,3 @@
-package cs2720.p4;
-
 public class HeapSort implements SortStrategy {
 
     private long comparisons = 0;

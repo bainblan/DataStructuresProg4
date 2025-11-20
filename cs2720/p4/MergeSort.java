@@ -1,18 +1,20 @@
-//package cs2720.p4;
+package cs2720.p4;
 
 public class MergeSort implements SortStrategy {
-
-    private long comparisons = 0;
-
-    public long getComparisons() {
-        return comparisons;
-    }
 
     @Override
     public void sort(int[] array) {
         // merge sort implementation
+        comparisons = 0;
         mergeSort(array, 0, array.length - 1);
     }
+
+    @Override
+    public long getComparisons() {
+        return comparisons;
+    }
+
+    private long comparisons = 0;
 
     private void mergeSort(int[] arr, int left, int right) {
         if (left >= right) {

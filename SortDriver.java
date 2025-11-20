@@ -1,8 +1,13 @@
+<<<<<<< HEAD
+=======
+//package cs2720.p4;
+
+>>>>>>> 6a3e8451ca50ec88fb49e742d8c5f055b0571c98
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class SortDriver {
 

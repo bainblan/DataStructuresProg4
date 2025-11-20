@@ -11,7 +11,7 @@ public class HeapSort implements SortStrategy {
     @Override
     public void sort(int[] array) {
         // heap sort implementation
-        heapSort(array, array.length - 1);
+        heapSort(array, array.length);
     }
 
     private void heapSort(int[] values, int numValues) {

@@ -11,6 +11,7 @@ public class HeapSort implements SortStrategy {
     @Override
     public void sort(int[] array) {
         // heap sort implementation
+        comparisons = 0;
         heapSort(array, array.length);
     }
 
@@ -43,6 +44,7 @@ public class HeapSort implements SortStrategy {
             }
         }
         // Compare child vs root
+        comparisons++;
         if (values[maxChild] > values[root]) {
             swap(values, maxChild, root);
             reheapDown(values, maxChild, bottom);

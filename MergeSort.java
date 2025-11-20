@@ -11,6 +11,7 @@ public class MergeSort implements SortStrategy {
     @Override
     public void sort(int[] array) {
         // merge sort implementation
+        comparisons = 0;
         mergeSort(array, 0, array.length - 1);
     }
 

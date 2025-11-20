@@ -19,6 +19,7 @@ public class QuickSortRandom implements SortStrategy {
      * @param array the array to sort
      */
     public void sort(int[] array) {
+        comparisons = 0;
         quickSortRand(array, 0, array.length - 1);
     }
 

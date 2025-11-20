@@ -21,9 +21,19 @@ public class SortDriver {
         System.out.print("Enter the algorithm: ");
         char choice = input.nextLine().trim().toLowerCase().charAt(0);
 
-        // 3. Read filename from command line
-        String filename = args[0];
+        // 3. Read filename from command line (or prompt if not provided)
+        String filename;
+        if (args != null && args.length >= 1) {
+            filename = args[0];
+        } else {
+            System.out.print("Enter filename (e.g., random.txt): ");
+            filename = input.nextLine().trim();
+        }
         File file = new File(filename);
+        if (!file.exists()) {
+            System.err.println("File not found: " + filename);
+            return;
+        }
 
         // 4. Read integers from file into ArrayList
         Scanner fileScanner = new Scanner(file);

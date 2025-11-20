@@ -11,6 +11,7 @@ public class SelectionSort implements SortStrategy {
     @Override
     public void sort(int[] array) {
         // selection sort implementation
+        comparisons = 0;
         selectionSort(array, array.length);
     }
 

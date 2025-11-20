@@ -16,6 +16,7 @@ public class QuickSortLast implements SortStrategy {
      */
     public void sort(int[] array) {
         // quick sort implementation
+        comparisons = 0;
         quickSortLast(array, 0, array.length - 1);
     }
 

@@ -36,12 +36,23 @@ public class SortSizeDriver {
             return;
         }
 
+
         long[] comparisonsResults = new long[3];
+        int[] initialArray = new int[size];
+        // Generate the initial array ONCE and print it
+        for (int i = 0; i < size; i++) {
+            initialArray[i] = (int) (Math.random() * 10000);
+        }
+        System.out.println("Initial unsorted array:");
+        for (int i = 0; i < size; i++) {
+            System.out.print(initialArray[i] + " ");
+        }
+        System.out.println();
+
+        // For each trial, copy the initial array and sort
         for (int trial = 0; trial < 3; trial++) {
             values = new int[size];
-            for (int i = 0; i < size; i++) {
-                values[i] = (int) (Math.random() * 10000); // Random integers between 0 and 9999
-            }
+            System.arraycopy(initialArray, 0, values, 0, size);
             switch (choice) {
                 case 's': sCalled(); break;
                 case 'm': mCalled(); break;

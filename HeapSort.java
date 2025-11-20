@@ -15,45 +15,39 @@ public class HeapSort implements SortStrategy {
     }
 
     private void heapSort(int[] values, int numValues) {
-        int index;
-        int comparisons = 0;
         // Convert array values[0..numValues-1] into a heap
         // (AKA Build-Max-Heap)
-        for (index = numValues / 2 - 1; index >= 0; index--) {
-            comparisons += reheapDown(values, index, numValues - 1);
+        for (int i = numValues / 2 - 1; i >= 0; i--) {
+            reheapDown(values, i, numValues - 1);
         }
         // Sort the array.
-        for (index = numValues - 1; index >= 1; index--) {
-            swap(values, numValues, index);
-            comparisons += reheapDown(values, 0, index - 1);
+        for (int end = numValues - 1; end > 0; end--) {
+            swap(values, 0, end);
+            reheapDown(values, 0, end - 1);
         }
-        System.out.println("HeapSort comparisons: " + comparisons);
     }
 
-    private int reheapDown(int[] values, int root, int bottom) {
-        int maxIndex;
-        int rightChild;
-        int leftChild;
-        int comparisons = 0;
-        leftChild = root * 2 + 1;
-        rightChild = root * 2 + 2;
-        // ReheapDown continued
-        maxIndex = -1;
-        if (leftChild <= bottom) {
-            //comparisons++;
-            if (values[leftChild] > values[rightChild]) {
-                maxIndex = leftChild;
-                comparisons++;
-            } else {
-                maxIndex = rightChild;
-            }
-            if (values[maxIndex] > values[root]) {
-                comparisons++;
-                swap(values, maxIndex, root);
-                reheapDown(values, maxIndex, bottom);
+    private void reheapDown(int[] values, int root, int bottom) {
+        int left = root * 2 + 1;
+        int right = root * 2 + 2;
+
+        if (left > bottom)
+            return;
+
+        int maxChild = left;
+        // Compare left vs right
+        if (right <= bottom) {
+            comparisons++; // COUNT
+            if (values[right] > values[left]) {
+                maxChild = right;
             }
         }
-        return comparisons;
+        // Compare child vs root
+        comparisons++; // COUNT
+        if (values[maxChild] > values[root]) {
+            swap(values, maxChild, root);
+            reheapDown(values, maxChild, bottom);
+        }
     }
 
     private void swap(int[] values, int item1, int item2) {

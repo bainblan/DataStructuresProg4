@@ -17,6 +17,7 @@ public class SelectionSort implements SortStrategy {
     private int minIndex(int[] values, int start, int end) {
         int indexOfMin = start;
         for (int index = start + 1; index <= end; index++) {
+            comparisons++;
             if (values[index] < values[indexOfMin]) {
                 indexOfMin = index;
             }

@@ -38,29 +38,33 @@ public class SortDriver {
         for (int i = 0; i < list.size(); i++) {
             values[i] = list.get(i);
         }
-        System.out.println("Nums loaded into array successfully");
-        
+        String type;
         // 6. SORT!
         if (choice == 's') {
             sCalled();
+            type = "#Selection-sort";
         } else if (choice == 'm') {
             mCalled();
+            type = "#Merge-sort";
         } else if (choice == 'h') {
             hCalled();
+            type = "#Heap-sort";
         } else if (choice == 'q') {
             qCalled();
+            type = "#quick-sort-last";
         } else {
             rCalled();
+            type = "#quick-sort-rand";
         }
 
         // 7. Print sorted values
         for (int i = 0; i < values.length; i++) {
-            System.out.println(values[i] + " ");
+            System.out.print(values[i] + " ");
         }
         int check = values[values.length - 1];
         if (values[0] == 0 && check == 9999) {
             System.out.println("Nums have been sorted!");
-            System.out.println("Number of comparisons = " + strategy.getComparisons());
+            System.out.println(type + " comparisons: " + strategy.getComparisons());
         } else {
             System.out.println("Needs some work");
         }

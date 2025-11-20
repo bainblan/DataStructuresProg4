@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class QuickSortRandom implements SortStrategy {
 
+    private final Random rand = new Random();
+
     private long comparisons = 0;
 
     public long getComparisons() {
@@ -20,8 +22,6 @@ public class QuickSortRandom implements SortStrategy {
         quickSortRand(array, 0, array.length - 1);
     }
 
-    private final Random rand = new Random();
-
     public void quickSortRand(int[] arr, int first, int last) {
         if (first < last) {
             int pivotIndex = randomPartition(arr, first, last);
@@ -32,7 +32,6 @@ public class QuickSortRandom implements SortStrategy {
 
     private int randomPartition(int[] arr, int first, int last) {
         int randomIndex = first + rand.nextInt(last - first + 1);
-        // swap random pivot into last
         swap(arr, randomIndex, last);
         return partition(arr, first, last);
     }
@@ -40,6 +39,7 @@ public class QuickSortRandom implements SortStrategy {
     private int partition(int[] arr, int first, int last) {
         int pivot = arr[last];
         int i = first - 1;
+
         for (int j = first; j < last; j++) {
             comparisons++;
             if (arr[j] < pivot) {

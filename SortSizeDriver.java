@@ -30,6 +30,8 @@ public class SortSizeDriver {
             type = "#Quick-sort-last";
         } else if (choice == 'r') {
             type = "#Quick-sort-rand";
+        } else if (choice == 'i') {
+            type = "#Quick-sort-iterative";
         } else {
             System.err.println("Invalid algorithm choice: " + choice);
             input.close();
@@ -55,6 +57,7 @@ public class SortSizeDriver {
                 case 'h': hCalled(); break;
                 case 'q': qCalled(); break;
                 case 'r': rCalled(); break;
+                case 'i': iCalled(); break;
             }
             comparisonsResults[trial] = strategy.getComparisons();
         }
@@ -98,6 +101,11 @@ public class SortSizeDriver {
 
     private static void rCalled() {
         strategy = new QuickSortRandom();
+        strategy.sort(values);
+    }
+
+    private static void iCalled() {
+        strategy = new QuickSortIterative();
         strategy.sort(values);
     }
 }

@@ -14,7 +14,7 @@ public class SortDriver {
 
         // 1. Print menu of algorithm options
         System.out.println("selection-sort (s) merge-sort (m) heap-sort (h) quick-sort-last (q)");
-        System.out.println("quick-sort-rand (r)");
+        System.out.println("quick-sort-rand (r) quick-sort-iterative (i)");
 
         // 2. Get algorithm letter from the user
         Scanner input = new Scanner(System.in);
@@ -62,6 +62,9 @@ public class SortDriver {
         } else if (choice == 'q') {
             qCalled();
             type = "#quick-sort-last";
+        } else if (choice == 'i') {
+            iCalled();
+            type = "#quick-sort-iterative";
         } else {
             rCalled();
             type = "#quick-sort-rand";
@@ -101,6 +104,11 @@ public class SortDriver {
 
     private static void rCalled() {
         strategy = new QuickSortRandom();
+        strategy.sort(values);
+    }
+
+    private static void iCalled() {
+        strategy = new QuickSortIterative();
         strategy.sort(values);
     }
 }

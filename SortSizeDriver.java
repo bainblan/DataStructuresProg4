@@ -37,22 +37,18 @@ public class SortSizeDriver {
         }
 
 
-        long[] comparisonsResults = new long[3];
-        int[] initialArray = new int[size];
-        // Generate the initial array ONCE and print it
-        for (int i = 0; i < size; i++) {
-            initialArray[i] = (int) (Math.random() * 10000);
-        }
-        System.out.println("Initial unsorted array:");
-        for (int i = 0; i < size; i++) {
-            System.out.print(initialArray[i] + " ");
-        }
-        System.out.println();
-
-        // For each trial, copy the initial array and sort
-        for (int trial = 0; trial < 3; trial++) {
+        long[] comparisonsResults = new long[30];
+        // For each trial, generate a new array, print it, and sort
+        for (int trial = 0; trial < 30; trial++) {
             values = new int[size];
-            System.arraycopy(initialArray, 0, values, 0, size);
+            for (int i = 0; i < size; i++) {
+                values[i] = (int) (Math.random() * 10000);
+            }
+            // System.out.println("Initial unsorted array for trial " + (trial+1) + ":");
+            // for (int i = 0; i < size; i++) {
+            //     System.out.print(values[i] + " ");
+            // }
+            System.out.println();
             switch (choice) {
                 case 's': sCalled(); break;
                 case 'm': mCalled(); break;
@@ -67,9 +63,13 @@ public class SortSizeDriver {
         System.out.println("================================");
         System.out.println("Algorithm: " + type);
         System.out.println("Array size: " + size);
-        for (int trial = 0; trial < 3; trial++) {
-            System.out.println("Trial " + (trial+1) + " comparisons: " + comparisonsResults[trial]);
+        long sum = 0;
+        for (int trial = 0; trial < 30; trial++) {
+            System.out.println(comparisonsResults[trial]);
+            sum += comparisonsResults[trial];
         }
+        double avg = sum / 30.0;
+        System.out.println("Average comparisons: " + avg);
         System.out.println("================================");
 
         input.close();

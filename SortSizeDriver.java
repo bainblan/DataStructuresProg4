@@ -1,24 +1,37 @@
 import java.util.Scanner;
 
+/**
+ * Driver to run sorting algorithms on arrays of a specified size and report
+ * comparisons statistics across multiple trials.
+ */
 public class SortSizeDriver {
     public static int[] values;
     public static SortStrategy strategy;
 
+    /**
+     * Prompts the user for algorithm and array size, runs multiple trials,
+     * and prints per-trial comparisons and the average.
+     */
     public static void main(String[] args) {
-        // 1. Print menu of algorithm options
         System.out.println("selection-sort (s) merge-sort (m) heap-sort (h) quick-sort-last (q)");
         System.out.println("quick-sort-rand (r)");
 
-        // 2. Get algorithm letter from the user
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the algorithm: ");
-        char choice = input.nextLine().trim().toLowerCase().charAt(0);
+        try {
+            System.out.print("Enter the algorithm: ");
+            char choice = input.nextLine().trim().toLowerCase().charAt(0);
 
-        // 3. Read size from user
-        System.out.print("Enter size of array to sort: ");
-        int size = input.nextInt();
+            System.out.print("Enter size of array to sort: ");
+            int size = input.nextInt();
 
-        // 4. Run three trials with new random arrays each time
+            runTrials(choice, size);
+        } finally {
+            input.close();
+        }
+
+    }
+
+    private static void runTrials(char choice, int size) {
         String type;
         if (choice == 's') {
             type = "#Selection-sort";
@@ -34,23 +47,15 @@ public class SortSizeDriver {
             type = "#Quick-sort-iterative";
         } else {
             System.err.println("Invalid algorithm choice: " + choice);
-            input.close();
             return;
         }
 
-
         long[] comparisonsResults = new long[30];
-        // For each trial, generate a new array, print it, and sort
         for (int trial = 0; trial < 30; trial++) {
             values = new int[size];
             for (int i = 0; i < size; i++) {
                 values[i] = (int) (Math.random() * 10000);
             }
-            // System.out.println("Initial unsorted array for trial " + (trial+1) + ":");
-            // for (int i = 0; i < size; i++) {
-            //     System.out.print(values[i] + " ");
-            // }
-            System.out.println();
             switch (choice) {
                 case 's': sCalled(); break;
                 case 'm': mCalled(); break;
@@ -62,7 +67,6 @@ public class SortSizeDriver {
             comparisonsResults[trial] = strategy.getComparisons();
         }
 
-        // Print results
         System.out.println("================================");
         System.out.println("Algorithm: " + type);
         System.out.println("Array size: " + size);
@@ -74,9 +78,6 @@ public class SortSizeDriver {
         double avg = sum / 30.0;
         System.out.println("Average comparisons: " + avg);
         System.out.println("================================");
-
-        input.close();
-
     }
 
     private static void sCalled() {

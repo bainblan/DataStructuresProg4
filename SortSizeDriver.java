@@ -64,6 +64,12 @@ public class SortSizeDriver {
                 case 'r': rCalled(); break;
                 case 'i': iCalled(); break;
             }
+            // Print the entire sorted array for this trial before printing comparisons
+            for (int i = 0; i < values.length; i++) {
+                System.out.print(values[i] + " ");
+            }
+            System.out.println();
+
             comparisonsResults[trial] = strategy.getComparisons();
         }
 

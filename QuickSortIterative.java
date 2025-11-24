@@ -1,41 +1,89 @@
-//package cs2720.p4;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-public class QuickSortIterative {
+/**
+ * Iterative implementation of QuickSort using an explicit stack.
+ * Uses the last element as the pivot for partitioning.
+ */
+public class QuickSortIterative implements SortStrategy {
 
-    static int partition(int arr[], int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1); // index of smaller element
-        for (int j = low; j <= high - 1; j++) {
-            // If current element is smaller than or
-            // equal to pivot
-            if (arr[j] <= pivot) {
-                i++;
+	private long comparisons = 0;
 
-                // swap arr[i] and arr[j]
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
+	/**
+	 * Sorts the provided array in-place using an iterative quicksort algorithm.
+	 * This method resets the internal comparison counter before sorting.
+	 *
+	 * @param array the array to sort; if null or length &lt;= 1 the method returns immediately
+	 */
+	@Override
+	public void sort(int[] array) {
+		comparisons = 0;
+		if (array == null || array.length <= 1) {
+			return;
+		}
 
-        // swap arr[i+1] and arr[high] (or pivot)
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
+		Deque<int[]> stack = new ArrayDeque<>();
+		stack.push(new int[] {0, array.length - 1});
 
-        return i + 1;
-    }
+		while (!stack.isEmpty()) {
+			int[] range = stack.pop();
+			int first = range[0];
+			int last = range[1];
+			if (first < last) {
+				int pivotIndex = partition(array, first, last);
+				if (pivotIndex + 1 < last) {
+					stack.push(new int[] {pivotIndex + 1, last});
+				}
+				if (first < pivotIndex - 1) {
+					stack.push(new int[] {first, pivotIndex - 1});
+				}
+			}
+		}
+	}
 
-    static void qSort(int arr[], int low, int high) {
-        if (low < high) {
-            /* pi is partitioning index, arr[pi] is
-            now at right place */
-            int pi = partition(arr, low, high);
+	/**
+	 * Returns the number of element comparisons performed during the last sort.
+	 *
+	 * @return the comparison count
+	 */
+	@Override
+	public long getComparisons() {
+		return comparisons;
+	}
 
-            // Recursively sort elements before
-            // partition and after partition
-            qSort(arr, low, pi - 1);
-            qSort(arr, pi + 1, high);
-        }
-    }
+	/**
+	 * Partitions the subarray arr[first..last] using the last element as pivot.
+	 * Increments the comparison counter once per element comparison.
+	 *
+	 * @param arr the array containing the subarray to partition
+	 * @param first index of the first element in the subarray
+	 * @param last index of the last element in the subarray (pivot)
+	 * @return the final pivot index
+	 */
+	private int partition(int[] arr, int first, int last) {
+		int pivot = arr[last];
+		int i = first - 1;
+		for (int j = first; j < last; j++) {
+			comparisons++;
+			if (arr[j] < pivot) {
+				i++;
+				swap(arr, i, j);
+			}
+		}
+		swap(arr, i + 1, last);
+		return i + 1;
+	}
+
+	/**
+	 * Swaps two elements in the given array.
+	 *
+	 * @param values the array containing elements to swap
+	 * @param a index of the first element
+	 * @param b index of the second element
+	 */
+	private void swap(int[] values, int a, int b) {
+		int tmp = values[a];
+		values[a] = values[b];
+		values[b] = tmp;
+	}
 }
